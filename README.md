@@ -24,7 +24,7 @@ To make navigation easy, the "diet" is broken down into these categories:
 | Day | Topic | Category | Key Takeaway | LinkedIn Post |
 | :--- | :--- | :--- | :--- | :--- |
 | 001 | DS vs. Data Analytics | Intro | Science predicts; Analytics describes. | [Link coming soon] |
-| 002 | The "Print" Power | Python | Your first debugging tool. | [Link coming soon] |
+| 002 | Excel vs. Python | Python | Your first debugging tool. | [Link coming soon] |
 | 003 | Why Pandas? | Tools | Think Excel, but with superpowers. | [Link coming soon] |
 
 *(New topics added daily!)*
