@@ -11,5 +11,5 @@ This folder contains daily insights on Python programming, specifically focused 
 | Day | Topic | Key Tool/Function | Link |
 | :--- | :--- | :--- | :--- |
 | 001 | DS vs. Data Analytics | General | [Post] |
-| 002 | Why Python? | General | [Post] |
+| 002 | Excel vs. Python | General | [Post] |
 | 008 | The DataFrame | Pandas | [Post] |
