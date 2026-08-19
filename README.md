@@ -1,44 +1,75 @@
-# The Data Diet 🥗 
-> **One bite-sized Data Science insight every single day.**
+# The Data Diet 🥗
 
-Welcome to **The Data Diet**! This repository is a collection of daily, beginner-friendly insights designed to take you from zero to Data Scientist. Whether you are a student, an aspiring analyst, or just curious about data, there is a seat at the table for you.
+> One bite-sized Data Science insight every single day.
 
-I am currently on a **90-day sprint** to master Data Science, and I believe the best way to learn is to teach. Let's grow together!
+Learning Data Science in public, one concept a day, for 90 days.
+This repo is the permanent knowledge base — technical notes, code, and revision-ready explanations for every topic covered.
 
----
+**Not storytelling. Not a blog. A reference you (and I) can come back to.**
 
-## 🗺️ The Menu (Content Pillars)
-To make navigation easy, the "diet" is broken down into these categories:
-
-* 🐍 **Python Pantry**: Core programming & automation.
-* 📊 **Stats Snacks**: Probability, distributions, and hypothesis testing.
-* 🧹 **Data Cleaning**: The art of making messy data useful.
-* 🤖 **ML Main Course**: Machine Learning algorithms explained simply.
-* 📈 **Visual Vitamins**: Data storytelling with Matplotlib & Seaborn.
-* 💼 **Career Carbs**: Resume tips, portfolios, and interview prep.
+Follow the daily posts on [LinkedIn](#) · Read the code-first notes below.
 
 ---
 
-## 📅 Daily Log
+## Content Pillars
 
-| Day | Topic | Category | Key Takeaway | LinkedIn Post |
-| :--- | :--- | :--- | :--- | :--- |
-| 001 | DS vs. Data Analytics | Intro | Science predicts; Analytics describes. | [Link coming soon] |
-| 002 | Excel vs. Python | Python | Your first debugging tool. | [Link coming soon] |
-| 003 | Why Pandas? | Tools | Think Excel, but with superpowers. | [Link coming soon] |
-
-*(New topics added daily!)*
-
----
-
-## 🛠️ How to Use This Repo
-1. **Star this repo** ⭐ to stay updated with the daily additions.
-2. **Browse the Folders** 📂 to find specific code snippets and visual guides.
-3. **Follow the Journey** 🔗 Connect with me on [Your LinkedIn Profile Link] for the daily discussion.
+| Pillar | Focus |
+|---|---|
+| 🐍 Python Pantry | Core Python & Pandas |
+| 📊 Stats Snacks | Statistics & probability |
+| 🧹 Data Cleaning | Wrangling messy data |
+| 🤖 ML Main Course | Machine learning |
+| 📈 Visual Vitamins | Data visualization |
+| 💼 Career Carbs | Interview prep & career notes |
+| 🥘 SQL Side-Dishes | SQL for data work |
 
 ---
 
-## 👤 About the Chef
-I'm a Data Science learner documenting my 3-month journey to professional mastery. Join me as I turn complex concepts into digestible daily habits.
+## Progress
 
-**"Data is the new oil, but only if you know how to refine it."**
+<!-- AUTO:PROGRESS:START -->
+**Day 2 of 90** · 2% complete
+<!-- AUTO:PROGRESS:END -->
+
+---
+
+## Daily Log
+
+<!-- AUTO:LOG:START -->
+| Day | Topic | Category | Difficulty | Link |
+|---|---|---|---|---|
+| 1 | The Mirror vs The Crystal Ball | Fundamentals | Beginner | [notes](content/day-001/github.md) |
+| 2 | Excel vs Python | Python | Beginner | [notes](content/day-002/github.md) |
+<!-- AUTO:LOG:END -->
+
+---
+
+## Repository Structure
+
+```
+Daily-Data-Diet/
+├── README.md
+├── topics.json
+├── state.json
+├── requirements.txt
+├── content/
+│   ├── day-001/
+│   │   ├── github.md
+│   │   ├── linkedin.md
+│   │   └── metadata.json
+├── templates/
+├── automation/
+│   ├── scripts/
+│   │   ├── generate_content.py
+│   │   └── update_readme.py
+│   └── prompts/
+└── .github/workflows/
+    ├── daily-content.yml
+    └── update-readme.yml
+```
+
+---
+
+## Author
+
+Building The Data Diet — learning in public, one day at a time.
