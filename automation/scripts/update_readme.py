@@ -1,35 +1,37 @@
 #!/usr/bin/env python3
 """
 update_readme.py
-
-Reads every content/day-XXX/metadata.json file and regenerates:
+Reads every <Pillar-Folder>/day-XXX/metadata.json file and regenerates:
   - the Daily Log table
   - the Progress line
 in README.md, between the AUTO:LOG / AUTO:PROGRESS markers.
-
 No manual README editing required — this is meant to run:
   - locally before a commit, OR
   - inside a GitHub Action (see .github/workflows/update-readme.yml)
-
 Usage:
     python automation/scripts/update_readme.py
 """
-
 import json
 import re
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-CONTENT_DIR = REPO_ROOT / "content"
 README_PATH = REPO_ROOT / "README.md"
 TOTAL_DAYS = 90  # the 90-day journey
+
+# Top-level folders that are never pillar/content folders — skip these
+# when scanning for day-XXX subfolders.
+SKIP_DIRS = {
+    ".git", ".github", "automation", "templates", "content",
+    "node_modules", ".venv", "venv",
+}
 
 
 def load_all_metadata():
     entries = []
-    if not CONTENT_DIR.exists():
-        return entries
-    for day_folder in sorted(CONTENT_DIR.glob("day-*")):
+    for day_folder in sorted(REPO_ROOT.glob("*/day-*")):
+        if day_folder.parts[len(REPO_ROOT.parts)] in SKIP_DIRS:
+            continue
         meta_path = day_folder / "metadata.json"
         if meta_path.exists():
             with open(meta_path, "r", encoding="utf-8") as f:
@@ -69,21 +71,17 @@ def replace_between_markers(text, start_marker, end_marker, new_content):
 def main():
     entries = load_all_metadata()
     if not entries:
-        print("No metadata.json files found under content/. Nothing to update.")
+        print("No metadata.json files found under pillar folders. Nothing to update.")
         return
-
     readme_text = README_PATH.read_text(encoding="utf-8")
-
     log_table = build_log_table(entries)
     readme_text = replace_between_markers(
         readme_text, "<!-- AUTO:LOG:START -->", "<!-- AUTO:LOG:END -->", log_table
     )
-
     progress_line = build_progress_line(entries)
     readme_text = replace_between_markers(
         readme_text, "<!-- AUTO:PROGRESS:START -->", "<!-- AUTO:PROGRESS:END -->", progress_line
     )
-
     README_PATH.write_text(readme_text, encoding="utf-8")
     print(f"README.md updated. {len(entries)} day(s) logged.")
 
