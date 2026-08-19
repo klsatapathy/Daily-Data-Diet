@@ -28,7 +28,7 @@ Follow the daily posts on [LinkedIn](#) · Read the code-first notes below.
 ## Progress
 
 <!-- AUTO:PROGRESS:START -->
-**Day 2 of 90** · 2% complete
+**Day 3 of 90** · 3% complete
 <!-- AUTO:PROGRESS:END -->
 
 ---
@@ -40,6 +40,7 @@ Follow the daily posts on [LinkedIn](#) · Read the code-first notes below.
 |---|---|---|---|---|
 | 1 | The Mirror vs The Crystal Ball | Fundamentals | Beginner | [notes](content/day-001/github.md) |
 | 2 | Excel vs Python | Python | Beginner | [notes](content/day-002/github.md) |
+| 3 | Variables & Data Types in Python | Python Pantry | Beginner | [notes](content/day-003/github.md) |
 <!-- AUTO:LOG:END -->
 
 ---
