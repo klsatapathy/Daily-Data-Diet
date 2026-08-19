@@ -1,4 +1,7 @@
-Data Diet - Day 4 draft ready (Stats Snacks)
+<!--
+LinkedIn Draft — Day 4 — Mean, Median, Mode - Which One Lies?
+Status: draft (requires manual approval before publish)
+-->
 
 Your average salary is probably lying to you. 
 
@@ -17,6 +20,3 @@ Navigating these little statistical traps is my main focus today, marking Day 4 
 I’m curious—have you ever spotted a headline or a job salary listing where you just *knew* they used the wrong average to make things look better? Let me know in the comments!
 
 #TheDataDiet #DataScience #Statistics #LearnInPublic #DataLiteracy #CareerTransition
-
----
-GitHub notes: 📊 Statistics-Snacks/day-004/github.md
