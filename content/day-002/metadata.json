@@ -1,0 +1,12 @@
+{
+  "day": 2,
+  "title": "Excel vs Python",
+  "category": "Python",
+  "difficulty": "Beginner",
+  "tags": ["excel", "python", "pandas", "data-analysis"],
+  "linkedin_status": "published",
+  "github_status": "published",
+  "linkedin_url": "",
+  "github_path": "content/day-002/github.md",
+  "date": "YYYY-MM-DD"
+}

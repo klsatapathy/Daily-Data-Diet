@@ -1,0 +1,58 @@
+name: Daily Data Diet Content
+
+on:
+  schedule:
+    - cron: "30 1 * * *"   # 7:00 AM IST every day (1:30 UTC)
+  workflow_dispatch: {}     # lets you trigger it manually to test
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate today's content
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python automation/scripts/generate_content.py
+
+      - name: Read generated PR title
+        id: prtitle
+        run: echo "title=$(cat pr_title.txt)" >> "$GITHUB_OUTPUT"
+
+      - name: Open Pull Request for review
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Add daily Data Diet content"
+          title: ${{ steps.prtitle.outputs.title }}
+          branch: daily-content-${{ github.run_number }}
+          body: |
+            Auto-generated content for today's Data Diet post.
+            Review `linkedin.md` and `github.md` in the new `content/day-XXX/`
+            folder, edit anything directly in this PR if needed, then merge.
+            Merging updates the repo AND triggers the README auto-update
+            workflow. Copy the LinkedIn text from Telegram to post manually.
+
+      - name: Send Telegram review notification
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          MSG=$(cat telegram_message.txt)
+          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${CHAT_ID}" \
+            --data-urlencode "text=${MSG}" > /dev/null

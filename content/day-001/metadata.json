@@ -1,0 +1,12 @@
+{
+  "day": 1,
+  "title": "The Mirror vs The Crystal Ball",
+  "category": "Fundamentals",
+  "difficulty": "Beginner",
+  "tags": ["data-science", "data-analytics", "python", "career"],
+  "linkedin_status": "published",
+  "github_status": "draft",
+  "linkedin_url": "",
+  "github_path": "content/day-001/github.md",
+  "date": "YYYY-MM-DD"
+}

@@ -1,0 +1,27 @@
+name: Update README
+
+on:
+  push:
+    paths:
+      - "content/**/metadata.json"
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Regenerate README
+        run: python automation/scripts/update_readme.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "data-diet-bot"
+          git config user.email "actions@github.com"
+          git add README.md
+          git diff --staged --quiet || git commit -m "chore: auto-update README daily log"
+          git push
