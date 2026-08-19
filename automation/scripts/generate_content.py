@@ -15,23 +15,6 @@ update_readme.py (triggered separately by the metadata.json push) picks
 this up automatically once the PR is merged.
 """
 
-"""
-The Data Diet - daily content generator.
-
-Reads topics.json + state.json, calls the free Gemini API TWICE per run
-(one call for the GitHub technical note, one independent call for the
-LinkedIn story post - matching automation/prompts/generate_content.md,
-which specifies the two should never influence each other), and writes:
-
-  content/day-XXX/github.md
-  content/day-XXX/linkedin.md
-  content/day-XXX/metadata.json
-
-Then advances state.json to the next topic in the round-robin rotation.
-update_readme.py (triggered separately by the metadata.json push) picks
-this up automatically once the PR is merged.
-"""
-
 import json
 import os
 import re
@@ -40,11 +23,14 @@ import time
 import requests
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
-GEMINI_MODEL = "gemini-flash-latest"
-GEMINI_URL = (
-    f"https://generativelanguage.googleapis.com/v1beta/models/"
-    f"{GEMINI_MODEL}:generateContent?key={GEMINI_API_KEY}"
-)
+GEMINI_MODELS = ["gemini-flash-latest", "gemini-flash-lite-latest"]
+
+
+def gemini_url(model):
+    return (
+        f"https://generativelanguage.googleapis.com/v1beta/models/"
+        f"{model}:generateContent?key={GEMINI_API_KEY}"
+    )
 
 TOPICS_FILE = "topics.json"
 STATE_FILE = "state.json"
@@ -74,16 +60,24 @@ def call_gemini(prompt, max_retries=4):
         sys.exit(1)
     payload = {"contents": [{"parts": [{"text": prompt}]}]}
 
-    for attempt in range(max_retries):
-        resp = requests.post(GEMINI_URL, json=payload, timeout=90)
-        if resp.status_code in (429, 503) and attempt < max_retries - 1:
-            wait = 5 * (2 ** attempt)
-            print(f"Gemini {resp.status_code}, retrying in {wait}s...")
-            time.sleep(wait)
-            continue
-        resp.raise_for_status()
-        data = resp.json()
-        return data["candidates"][0]["content"]["parts"][0]["text"].strip()
+    for model in GEMINI_MODELS:
+        url = gemini_url(model)
+        for attempt in range(max_retries):
+            resp = requests.post(url, json=payload, timeout=90)
+            if resp.status_code in (429, 503) and attempt < max_retries - 1:
+                wait = 5 * (2 ** attempt)
+                print(f"{model} -> {resp.status_code}, retrying in {wait}s...")
+                time.sleep(wait)
+                continue
+            if resp.status_code in (429, 503):
+                print(f"{model} still failing after retries, trying next model...")
+                break
+            resp.raise_for_status()
+            data = resp.json()
+            return data["candidates"][0]["content"]["parts"][0]["text"].strip()
+
+    print("ERROR: all Gemini models failed (persistent 429/503).")
+    sys.exit(1)
 
 
 def github_prompt(pillar, topic, day_number, tags):
