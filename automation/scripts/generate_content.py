@@ -6,9 +6,9 @@ Reads topics.json + state.json, calls the free Gemini API TWICE per run
 LinkedIn story post - matching automation/prompts/generate_content.md,
 which specifies the two should never influence each other), and writes:
 
-  content/day-XXX/github.md
-  content/day-XXX/linkedin.md
-  content/day-XXX/metadata.json
+  <Pillar-Folder>/day-XXX/github.md
+  <Pillar-Folder>/day-XXX/linkedin.md
+  <Pillar-Folder>/day-XXX/metadata.json
 
 Then advances state.json to the next topic in the round-robin rotation.
 update_readme.py (triggered separately by the metadata.json push) picks
@@ -25,6 +25,18 @@ import requests
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 GEMINI_MODELS = ["gemini-flash-latest", "gemini-flash-lite-latest"]
 
+# Maps each pillar name (as used in topics.json) to its repo folder.
+# Add an entry here whenever a new pillar is added to topics.json.
+PILLAR_FOLDERS = {
+    "Python Pantry": "🐍 Python-Pantry",
+    "Stats Snacks": "📊 Statistics-Snacks",
+    "Data Cleaning": "🧹 Data-Cleaning",
+    "ML Main Course": "🤖 ML-Main-Course",
+    "Visual Vitamins": "📈 Visual-Vitamins",
+    "Career Carbs": "💼 Career-Carbs",
+    "SQL Side-Dishes": "🥘 SQL-Side-Dishes",
+}
+
 
 def gemini_url(model):
     return (
@@ -32,9 +44,9 @@ def gemini_url(model):
         f"{model}:generateContent?key={GEMINI_API_KEY}"
     )
 
+
 TOPICS_FILE = "topics.json"
 STATE_FILE = "state.json"
-CONTENT_DIR = "content"
 
 DIFFICULTY_DEFAULT = "Beginner"
 
@@ -163,13 +175,19 @@ def main():
         print(f"All topics exhausted for pillar '{pillar}'. Add more topics to topics.json.")
         sys.exit(1)
 
+    if pillar not in PILLAR_FOLDERS:
+        print(f"ERROR: no folder mapping for pillar '{pillar}'. Add it to PILLAR_FOLDERS.")
+        sys.exit(1)
+
+    pillar_folder = PILLAR_FOLDERS[pillar]
+
     topic = topic_list[topic_idx]
     tags = [slugify(pillar), slugify(topic).split("-")[0]]
 
     github_body = call_gemini(github_prompt(pillar, topic, day_number, tags))
     linkedin_body = call_gemini(linkedin_prompt(pillar, topic, day_number, tags))
 
-    day_folder = f"{CONTENT_DIR}/day-{day_number:03d}"
+    day_folder = f"{pillar_folder}/day-{day_number:03d}"
     os.makedirs(day_folder, exist_ok=True)
 
     github_content = (
