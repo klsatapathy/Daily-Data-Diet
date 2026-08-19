@@ -15,10 +15,28 @@ update_readme.py (triggered separately by the metadata.json push) picks
 this up automatically once the PR is merged.
 """
 
+"""
+The Data Diet - daily content generator.
+
+Reads topics.json + state.json, calls the free Gemini API TWICE per run
+(one call for the GitHub technical note, one independent call for the
+LinkedIn story post - matching automation/prompts/generate_content.md,
+which specifies the two should never influence each other), and writes:
+
+  content/day-XXX/github.md
+  content/day-XXX/linkedin.md
+  content/day-XXX/metadata.json
+
+Then advances state.json to the next topic in the round-robin rotation.
+update_readme.py (triggered separately by the metadata.json push) picks
+this up automatically once the PR is merged.
+"""
+
 import json
 import os
 import re
 import sys
+import time
 import requests
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
@@ -50,15 +68,22 @@ def slugify(text):
     return re.sub(r"\s+", "-", text)
 
 
-def call_gemini(prompt):
+def call_gemini(prompt, max_retries=4):
     if not GEMINI_API_KEY:
         print("ERROR: GEMINI_API_KEY env var is not set.")
         sys.exit(1)
     payload = {"contents": [{"parts": [{"text": prompt}]}]}
-    resp = requests.post(GEMINI_URL, json=payload, timeout=90)
-    resp.raise_for_status()
-    data = resp.json()
-    return data["candidates"][0]["content"]["parts"][0]["text"].strip()
+
+    for attempt in range(max_retries):
+        resp = requests.post(GEMINI_URL, json=payload, timeout=90)
+        if resp.status_code in (429, 503) and attempt < max_retries - 1:
+            wait = 5 * (2 ** attempt)
+            print(f"Gemini {resp.status_code}, retrying in {wait}s...")
+            time.sleep(wait)
+            continue
+        resp.raise_for_status()
+        data = resp.json()
+        return data["candidates"][0]["content"]["parts"][0]["text"].strip()
 
 
 def github_prompt(pillar, topic, day_number, tags):
