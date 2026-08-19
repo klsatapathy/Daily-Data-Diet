@@ -1,4 +1,7 @@
-Data Diet - Day 5 draft ready (Data Cleaning)
+<!--
+LinkedIn Draft — Day 5 — Why Dirty Data Kills Models
+Status: draft (requires manual approval before publish)
+-->
 
 Your fancy machine learning model is basically an extremely confident toddler, and it will happily ruin your life if you feed it garbage.
 
@@ -15,6 +18,3 @@ Tackling this on Day 5 of 90 made me realize that being a good data scientist is
 What's the wildest mistake you've ever seen bad data cause in the wild? Drop your horror stories in the comments!
 
 #TheDataDiet #DataCleaning #DataScience #LearningInPublic #DataAnalytics
-
----
-GitHub notes: 🧹 Data-Cleaning/day-005/github.md

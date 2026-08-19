@@ -1,1 +1,1 @@
-Day 4: Mean, Median, Mode - Which One Lies? (Stats Snacks)
+Day 5: Why Dirty Data Kills Models (Data Cleaning)
