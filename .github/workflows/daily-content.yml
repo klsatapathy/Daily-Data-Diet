@@ -33,6 +33,16 @@ jobs:
         id: prtitle
         run: echo "title=$(cat pr_title.txt)" >> "$GITHUB_OUTPUT"
 
+      - name: Send Telegram review notification
+        env:
+          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          MSG=$(cat telegram_message.txt)
+          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${CHAT_ID}" \
+            --data-urlencode "text=${MSG}" > /dev/null
+
       - name: Open Pull Request for review
         uses: peter-evans/create-pull-request@v6
         with:
@@ -46,13 +56,3 @@ jobs:
             folder, edit anything directly in this PR if needed, then merge.
             Merging updates the repo AND triggers the README auto-update
             workflow. Copy the LinkedIn text from Telegram to post manually.
-
-      - name: Send Telegram review notification
-        env:
-          BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          MSG=$(cat telegram_message.txt)
-          curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
-            --data-urlencode "chat_id=${CHAT_ID}" \
-            --data-urlencode "text=${MSG}" > /dev/null
