@@ -1,4 +1,7 @@
-Data Diet - Day 6 draft ready (ML Main Course)
+<!--
+LinkedIn Draft — Day 6 — What is Machine Learning, Really?
+Status: draft (requires manual approval before publish)
+-->
 
 Most people think Machine Learning is about building a super-intelligent robot brain. 
 
@@ -26,6 +29,3 @@ It’s Day 6 of 90 on The Data Diet 🥗, and stepping into our ML Main Course w
 What’s the best non-technical analogy you’ve ever heard that made a complex concept finally click? Drop it in the comments—I'm always looking for better ways to explain things!
 
 #TheDataDiet #MachineLearning #DataScience #LearnInPublic #TechMadeSimple #AI
-
----
-GitHub notes: 🤖 ML-Main-Course/day-006/github.md
