@@ -1,4 +1,7 @@
-Data Diet - Day 6 draft ready (ML Main Course)
+<!--
+LinkedIn Draft — Day 6 — What is Machine Learning, Really?
+Status: draft (requires manual approval before publish)
+-->
 
 For the longest time, I thought Machine Learning was about building miniature robot brains. 
 
@@ -23,6 +26,3 @@ We are officially serving up our very first "ML Main Course" here on Day 6 of 90
 How would you explain Machine Learning in one sentence to someone who has never worked in tech? Drop your favorite analogy below! 👇
 
 #TheDataDiet #MachineLearning #DataScience #LearnInPublic #AI #TechCareers
-
----
-GitHub notes: 🤖 ML-Main-Course/day-006/github.md
