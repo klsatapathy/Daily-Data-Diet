@@ -1,1 +1,1 @@
-Day 5: Why Dirty Data Kills Models (Data Cleaning)
+Day 6: What is Machine Learning, Really? (ML Main Course)
