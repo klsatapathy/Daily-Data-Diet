@@ -1,4 +1,7 @@
-Data Diet - Day 6 draft ready (ML Main Course)
+<!--
+LinkedIn Draft — Day 6 — What is Machine Learning, Really?
+Status: draft (requires manual approval before publish)
+-->
 
 For the longest time, I secretly thought Machine Learning meant building a digital brain that was already smarter than the humans who created it. 
 
@@ -21,6 +24,3 @@ At its core, Machine Learning is simply pattern recognition at scale. We feed an
 If you work in data or tech, how do you explain Machine Learning to friends and family without their eyes glazing over? Drop your go-to analogy below! 👇
 
 #TheDataDiet #MachineLearning #DataScience #LearnInPublic #ArtificialIntelligence #TechJourney
-
----
-GitHub notes: 🤖 ML-Main-Course/day-006/github.md
