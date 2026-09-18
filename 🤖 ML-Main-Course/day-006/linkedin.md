@@ -1,0 +1,28 @@
+<!--
+LinkedIn Draft — Day 6 — What is Machine Learning, Really?
+Status: draft (requires manual approval before publish)
+-->
+
+"Machine learning" sounds like chrome-plated robots taking over the world, but it is actually much closer to teaching a toddler not to eat dirt.
+
+When I first opened a machine learning textbook, I fully expected an impenetrable wall of wizardry. In my head, software engineers were sitting in dark rooms hand-crafting millions of hyper-specific rules to make computers "smart." 
+
+Turns out, we don't teach machines by writing more rules. We teach them by letting them practice.
+
+Think about how you learned to ride a bike. 
+
+Nobody handed you a 400-page manual breaking down the exact physics of angular momentum and gyroscopic precession. You didn't calculate lean angles in your head. You just hopped on, wobbled, scraped a knee, adjusted your weight, and tried again. After enough repetitions, your brain quietly pieced together the pattern of balance.
+
+That is machine learning in a nutshell.
+
+Traditional programming is like giving someone a rigid recipe: "Chop the onion, heat the pan to 350 degrees, stir for two minutes." If an unexpected ingredient shows up, the program crashes.
+
+Machine learning flips the kitchen upside down. Instead of giving the computer the recipe, you show it 10,000 photos of delicious dinners and 10,000 photos of burnt toast, then tell it: "Figure out what makes the good ones work." 
+
+The computer doesn't possess human consciousness. It is simply a tireless pattern-hunter, running through millions of tiny wobbles until it learns how to stay upright.
+
+Today is Day 6 of 90 on The Data Diet 🥗, and unpacking this concept made the entire field feel a lot less like science fiction and a lot more like common sense.
+
+If you had to explain machine learning to a ten-year-old using an everyday object or hobby, what analogy would you use? Drop your best one below—I'd love to steal a few for future dinner parties!
+
+#TheDataDiet #MachineLearning #DataScience #LearningInPublic #TechMadeSimple
